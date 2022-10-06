@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500');
+
 .App {
   text-align: center;
+  font-family: 'Manrope', sans-serif;
+  color: white;
+  background-color: #00043B;
 }
 
 .App-logo {
@@ -14,7 +19,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #00043B;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +40,23 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h1 {
+  margin-top: 3rem;
+  font-size: 50pt;
+}
+
+button {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16pt;
+  height: 3.3rem;
+}
+
+input {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16pt;
+  height: 3rem;
+  width: 20rem;
+
 }
