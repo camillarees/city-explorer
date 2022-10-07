@@ -28,12 +28,14 @@ class App extends React.Component {
       const response = await axios.get(url)
       console.log('Response Object: ', response);
       console.log('response.data[0]: ', response.data[0]);
-      this.setState({ location: response.data[0] }, () => this.getMap());
+      this.setState({ location: response.data[0], errorMessage: false }, () => this.getMap());
     } catch (error) {
       console.log(error.response.data);
       this.setState({
         errorMessage: true,
-        error: error.response.data.error
+        error: error.response.data.error,
+        location: {},
+        map: ''
       })
     }
   }
@@ -58,7 +60,7 @@ class App extends React.Component {
         />
         <button onClick={this.getLocation}>explore</button>
         {this.state.errorMessage &&
-          <Alert variant="success">
+          <Alert variant="danger">
             <Alert.Heading>{this.state.error}</Alert.Heading>
             <p>
               please enter a valid location
