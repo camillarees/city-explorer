@@ -100,12 +100,12 @@ class App extends React.Component {
                   <h2>{this.state.location.lon}</h2>
                 </Accordion.Body>
               </Accordion.Item>
-              <Accordion.Item eventKey="3">
+              {/* <Accordion.Item eventKey="3">
                 <Accordion.Header>forcast</Accordion.Header>
                 <Accordion.Body>
                   <h2> check the forcast for this city {this.state.weather.map(cityName, idx)}</h2>
                 </Accordion.Body>
-              </Accordion.Item>
+              </Accordion.Item> */}
             </Accordion>
           </>
         }

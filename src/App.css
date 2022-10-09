@@ -4,7 +4,11 @@
   text-align: center;
   font-family: 'Manrope', sans-serif;
   color: white;
-  background-color: #00043B;
+  /* background-color: #00043B; */
+  background-image: url(../public/images/city-lights.jpg);
+  background-size: cover;
+  background-position: top;
+  position: relative;
 }
 
 .App-logo {
@@ -19,7 +23,7 @@
 }
 
 .App-header {
-  background-color: #00043B;
+ 
   min-height: 100vh;
   display: flex;
   flex-direction: column;
