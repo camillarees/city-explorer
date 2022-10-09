@@ -48,6 +48,12 @@ class App extends React.Component {
     });
   };
 
+  getWeather = async () => {
+    const url = `${process.env.REACT_APP_SERVER}/weather?lon`;
+    const response = await axios.get(url);
+    console.log(response.data);
+  }
+
 
   render() {
     return (
@@ -92,6 +98,12 @@ class App extends React.Component {
                 <Accordion.Header>longitude</Accordion.Header>
                 <Accordion.Body>
                   <h2>{this.state.location.lon}</h2>
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="3">
+                <Accordion.Header>forcast</Accordion.Header>
+                <Accordion.Body>
+                  <h2> check the forcast for this city {this.state.weather.map(cityName, idx)}</h2>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
