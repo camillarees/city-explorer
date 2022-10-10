@@ -5,6 +5,7 @@ import axios from 'axios';
 import Accordion from 'react-bootstrap/Accordion';
 import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
+import Weather from './Weather.js';
 
 
 class App extends React.Component {
@@ -13,7 +14,8 @@ class App extends React.Component {
     this.state = {
       searchQuery: "",
       location: {},
-      errorMessage: false
+      errorMessage: false,
+      weather: []
     }
   };
 
@@ -45,13 +47,16 @@ class App extends React.Component {
   getMap = async () => {
     this.setState({
       map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=12`
-    });
+    }, () => this.getWeather());
   };
 
   getWeather = async () => {
-    const url = `${process.env.REACT_APP_SERVER}/weather?lon`;
+    const url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.searchQuery}`;
     const response = await axios.get(url);
     console.log(response.data);
+    this.setState({
+      weather: response.data
+    })
   }
 
 
@@ -100,12 +105,12 @@ class App extends React.Component {
                   <h2>{this.state.location.lon}</h2>
                 </Accordion.Body>
               </Accordion.Item>
-              {/* <Accordion.Item eventKey="3">
-                <Accordion.Header>forcast</Accordion.Header>
+              <Accordion.Item eventKey="3">
+                <Accordion.Header>Weather</Accordion.Header>
                 <Accordion.Body>
-                  <h2> check the forcast for this city {this.state.weather.map(cityName, idx)}</h2>
+                  <Weather weatherData={this.state.weather}/>
                 </Accordion.Body>
-              </Accordion.Item> */}
+              </Accordion.Item>
             </Accordion>
           </>
         }
