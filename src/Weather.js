@@ -9,7 +9,7 @@ class Weather extends React.Component {
                 <ul key={idx}>
                     <li>
                         <p>date: {day.date}</p>
-                        <p>weather: {day.forecast}</p>
+                        <p>weather: {day.description}</p>
                     </li>
                 </ul>
 

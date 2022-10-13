@@ -64,3 +64,13 @@ input {
   width: 20rem;
 
 }
+
+Image {
+  width: 200px;
+  height: 150px;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0;
+}
+
