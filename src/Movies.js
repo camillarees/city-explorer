@@ -1,27 +1,29 @@
 import React from 'react';
+import { Row, Col, Card } from 'react-bootstrap';
 
 class Movies extends React.Component {
     render() {
         return (
-            <>
-                {this.props.movieData.map((movie, idx) => (
-                    <ul key={idx}>
-                        <li>
-                            <p>title {movie.title}</p>
-                            <p>overview {movie.overview}</p>
-                            <p>average votes {movie.averageVotes}</p>
-                            <p>total votes {movie.totalVotes}</p>
-                            <p>poster {movie.imageUrl}</p>
-                            <p>popularity{movie.popularity}</p>
-                            <p>release date {movie.releaseDate}</p>
-                        </li>
-                    </ul>
-
-                ))
-                }
-            </>
+            <Row>
+                {this.props.movieData.map(movie => (
+                    <Col>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Img variant="top" src={movie.imageUrl} />
+                            <Card.Body>
+                                <Card.Title>{movie.title}</Card.Title>
+                                <Card.Text> overview: {movie.overview} </Card.Text>
+                                <Card.Text> total votes: {movie.totalVotes}</Card.Text>
+                                <Card.Text> average votes: {movie.averageVotes}</Card.Text>
+                                <Card.Text> popularity: {movie.popularity}</Card.Text>
+                                <Card.Text> release date {movie.releaseDate}</Card.Text>
+                            </Card.Body>
+                        </Card>
+                        </Col>
+                    ) ) }
+                        </Row>
         )
     }
 }
 
 export default Movies;
+

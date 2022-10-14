@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import Accordion from 'react-bootstrap/Accordion';
@@ -18,7 +17,7 @@ class App extends React.Component {
       location: {},
       errorMessage: false,
       weather: [],
-      movies: []
+      movie: []
     }
   };
 
@@ -52,8 +51,8 @@ class App extends React.Component {
 
   getWeather = async () => {
     try {
-      const url = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
-      const response = await axios.get(url);
+      const weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
+      const response = await axios.get(weatherUrl);
       console.log(response.data);
       this.setState({ weather: response.data });
     } catch (error) {
@@ -70,8 +69,8 @@ class App extends React.Component {
 
   getMovies = async () => {
     try {
-      const url = `${process.env.REACT_APP_SERVER}/movies?query=${this.state.movies}`;
-      const response = await axios.get(url);
+      const movieUrl = `${process.env.REACT_APP_SERVER}/movies?query=${this.state.movie}`;
+      const response = await axios.get(movieUrl);
       this.setState({ movie: response.data });
     } catch (error) {
     this.setState ({
@@ -149,7 +148,7 @@ class App extends React.Component {
               <Accordion.Item eventKey="4">
                 <Accordion.Header>movies</Accordion.Header>
                 <Accordion.Body>
-                  <Movies movieData ={this.state.movies} />
+                  <Movies movieData={this.state.movie} />
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
