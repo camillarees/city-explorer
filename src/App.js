@@ -4,9 +4,11 @@ import axios from 'axios';
 import Accordion from 'react-bootstrap/Accordion';
 import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
-import Weather from './Weather.js';
+import WeatherDay from './Components/WeatherDay.js';
+import Weather from './Components/Weather.js'
 import Form from 'react-bootstrap/Form';
-import Movies from './Movies.js';
+import Movie from './Components/Movie.js';
+import Movies from './Components/Movies.js';
 
 
 class App extends React.Component {
@@ -46,7 +48,10 @@ class App extends React.Component {
   getMap = async () => {
     this.setState({
       map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=12`
-    }, () => this.getWeather());
+    }, () => {
+      this.getWeather();
+      this.getMovies();
+     });
   };
 
   getWeather = async () => {
@@ -69,7 +74,7 @@ class App extends React.Component {
 
   getMovies = async () => {
     try {
-      const movieUrl = `${process.env.REACT_APP_SERVER}/movies?query=${this.state.movie}`;
+      const movieUrl = `${process.env.REACT_APP_SERVER}/movies?city=${this.state.searchQuery}`;
       const response = await axios.get(movieUrl);
       this.setState({ movie: response.data });
     } catch (error) {
@@ -142,13 +147,13 @@ class App extends React.Component {
               <Accordion.Item eventKey="3">
                 <Accordion.Header>weather</Accordion.Header>
                 <Accordion.Body>
-                  <Weather weatherData={this.state.weather} />
+                  <WeatherDay weatherData={this.state.weather} />
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="4">
                 <Accordion.Header>movies</Accordion.Header>
                 <Accordion.Body>
-                  <Movies movieData={this.state.movie} />
+                  <Movie movieData={this.state.searchQuery} />
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
