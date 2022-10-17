@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import SearchForm from './Components/SearchForm';
 import Accordion from 'react-bootstrap/Accordion';
 import Image from 'react-bootstrap/Image';
-import Alert from 'react-bootstrap/Alert';
-import WeatherDay from './Components/WeatherDay.js';
-import Weather from './Components/Weather.js'
-import Form from 'react-bootstrap/Form';
-import Movie from './Components/Movie.js';
+import InvalidSearchAlert from './Components/InvalidSearchAlert';
+import Weather from './Components/Weather.js';
 import Movies from './Components/Movies.js';
 
 
@@ -51,7 +49,7 @@ class App extends React.Component {
     }, () => {
       this.getWeather();
       this.getMovies();
-     });
+    });
   };
 
   getWeather = async () => {
@@ -78,12 +76,12 @@ class App extends React.Component {
       const response = await axios.get(movieUrl);
       this.setState({ movie: response.data });
     } catch (error) {
-    this.setState ({
-      errorMessage: true,
+      this.setState({
+        errorMessage: true,
         error: error.response.data.error,
-          location: { },
-      map: ''
-})
+        location: {},
+        map: ''
+      })
     }
   }
 
@@ -98,24 +96,10 @@ class App extends React.Component {
       <div className="App">
         <h1>city explorer</h1>
         <>
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Group>
-              <Form.Label>search any city in the world</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={this.handleChange}
-                placeholder="start typing"
-              />
-            </Form.Group>
-          </Form>
+          <SearchForm handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
         </>
         {this.state.errorMessage &&
-          <Alert variant="danger">
-            <Alert.Heading>{this.state.error}</Alert.Heading>
-            <p>
-              please enter a valid location
-            </p>
-          </Alert>
+          <InvalidSearchAlert />
         }
         {this.state.location.display_name &&
           <>
@@ -133,27 +117,22 @@ class App extends React.Component {
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="1">
-                <Accordion.Header>latitude</Accordion.Header>
+                <Accordion.Header>latitude and longitude</Accordion.Header>
                 <Accordion.Body>
                   <h2>{this.state.location.lat}</h2>
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="2">
-                <Accordion.Header>longitude</Accordion.Header>
-                <Accordion.Body>
                   <h2>{this.state.location.lon}</h2>
                 </Accordion.Body>
               </Accordion.Item>
-              <Accordion.Item eventKey="3">
+              <Accordion.Item eventKey="2">
                 <Accordion.Header>weather</Accordion.Header>
                 <Accordion.Body>
-                  <WeatherDay weatherData={this.state.weather} />
+                  <Weather weatherData={this.state.weather} />
                 </Accordion.Body>
               </Accordion.Item>
-              <Accordion.Item eventKey="4">
+              <Accordion.Item eventKey="3">
                 <Accordion.Header>movies</Accordion.Header>
                 <Accordion.Body>
-                  <Movie movieData={this.state.searchQuery} />
+                  <Movies movieData={this.state.movie} />
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

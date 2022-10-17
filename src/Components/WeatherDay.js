@@ -9,8 +9,8 @@ class WeatherDay extends React.Component {
             
                 <ul>
                     <li>
-                        <p>date: {this.props.date}</p>
-                        <p>weather: {this.props.description}</p>
+                        <p>date: {this.props.weather.date}</p>
+                        <p>weather: {this.props.weather.description}</p>
                     </li>
                 </ul>
 

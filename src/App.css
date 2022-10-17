@@ -59,8 +59,8 @@ input {
 }
 
 Image {
-  width: 200px;
-  height: 150px;
+  width: 200px !important;
+  height: 150px !important;
   position: relative;
   display: inline-block;
   overflow: hidden;
