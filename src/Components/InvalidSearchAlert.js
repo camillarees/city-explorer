@@ -7,7 +7,7 @@ render() {
     return (
         <>
             <Alert variant="danger">
-                <Alert.Heading>{this.state.error}</Alert.Heading>
+                <Alert.Heading>{this.props.state}</Alert.Heading>
                 <p>
                     please enter a valid location
                 </p>

@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
-import SearchForm from './Components/SearchForm';
 import Accordion from 'react-bootstrap/Accordion';
+import SearchForm from './Components/SearchForm.js';
+import LatLon from './Components/LatLon.js'
 import Image from 'react-bootstrap/Image';
-import InvalidSearchAlert from './Components/InvalidSearchAlert';
+import InvalidSearchAlert from './Components/InvalidSearchAlert.js';
 import Weather from './Components/Weather.js';
 import Movies from './Components/Movies.js';
 import Footer from './Components/Footer.js';
@@ -38,7 +39,7 @@ class App extends React.Component {
         errorMessage: true,
         error: error.response.data.error,
         location: {},
-        map: ''
+        map: '',
       })
     }
   }
@@ -46,7 +47,7 @@ class App extends React.Component {
 
   getMap = async () => {
     this.setState({
-      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=12&size=1200x400`
+      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=12&size=1200x500`
     }, () => {
       this.getWeather();
       this.getMovies();
@@ -100,7 +101,7 @@ class App extends React.Component {
           <SearchForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
         </>
         {this.state.errorMessage &&
-          <InvalidSearchAlert />
+          <InvalidSearchAlert alert={this.state.error}/>
         }
         {this.state.location.display_name &&
           <>
@@ -109,33 +110,34 @@ class App extends React.Component {
             fluid src={this.state.map}
             alt="city map" />
             </div>
-            <Accordion className='accordion' defaultActiveKey="0">
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>city</Accordion.Header>
+            <div className='accordion-div'>
+            <Accordion class='accordion accordion-flush' id='accordion' defaultActiveKey="0">
+              <Accordion.Item id="accordion-item" eventKey="0">
+                <Accordion.Header id="accordion-header">city</Accordion.Header>
                 <Accordion.Body>
-                  <h2>the city you searched for is {this.state.location.display_name}</h2>
+                  <h2>the city you searched for is {this.state.location.display_name.toLowerCase()}</h2>
                 </Accordion.Body>
               </Accordion.Item>
-              <Accordion.Item eventKey="1">
+              <Accordion.Item id="accordion-item" eventKey="1">
                 <Accordion.Header>latitude and longitude</Accordion.Header>
                 <Accordion.Body>
-                  <h2>latitude: {this.state.location.lat}</h2>
-                  <h2>longitude: {this.state.location.lon}</h2>
+              <LatLon lat={this.state.location.lat} lon={this.state.location.lon} />
                 </Accordion.Body>
               </Accordion.Item>
-              <Accordion.Item eventKey="2">
+              <Accordion.Item id="accordion-item" eventKey="2">
                 <Accordion.Header>weather</Accordion.Header>
                 <Accordion.Body>
                   <Weather weatherData={this.state.weather} />
                 </Accordion.Body>
               </Accordion.Item>
-              <Accordion.Item eventKey="3">
+              <Accordion.Item id="accordion-item-movie" eventKey="3">
                 <Accordion.Header>movies</Accordion.Header>
                 <Accordion.Body>
                   <Movies movieData={this.state.movie} />
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
+            </div>
             <Footer />
           </>
         }

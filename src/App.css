@@ -72,6 +72,20 @@ input {
   max-height: 20%;
 }
 
+#accordion-item {
+  font-size: inherit;
+  color: inherit;
+  background: rgba(0, 0, 47, 0.709)
+}
+
+#accordion-item-movie {
+  font-size: inherit;
+  background: rgba(0, 0, 47, 0.709)
+}
+
+#card-element {
+  margin-bottom: 2rem;
+}
 
 .footer-text {
   margin-top: 3rem;
