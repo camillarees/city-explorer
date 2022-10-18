@@ -1,6 +1,6 @@
 # City Explorer
 
-![City Explorer Main Page](./images/city-explorer-main.png)
+![City Explorer Main Page](../images/city-explorer-main.png)
 
 **Author**: Camilla Rees
 **Version**: 1.0.0
@@ -20,19 +20,19 @@ Search for cities to learn all about them. See a map of the city, its coordinate
 
 ## Key Features
 
-![Map](./images/map-photo.png)
+![Map](../images/map-photo.png)
 
-** - Map: User can view a map of the city searched, centered by city coordinates **
+### Map: User can view a map of the city searched, centered by city coordinates 
 
-![Weather](./images/forecast.png)
+![Weather](../images/forecast.png)
 
-** - Weather: User can view the coordinates and 5 day forecast for city searched **
+### Weather: User can view the coordinates and 5 day forecast for city searched
 
-![Movies](./images/movies.png)
+![Movies](../images/movies.png)
 
-** - Movies: User can browse a visual list of movies associated with city searched, as well as the movie's overview, ratings, and release date **
+### Movies: User can browse a visual list of movies associated with city searched, as well as the movie's overview, ratings, and release date
 
-** - Application stores previous searches in server memory for future calls, rather than incurring the delay of repeating the request to third-party APIs. **
+### Application stores previous searches in server memory for future calls, rather than incurring the delay of repeating the request to third-party APIs
 
 ## Architecture
 
