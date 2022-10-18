@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image';
 import InvalidSearchAlert from './Components/InvalidSearchAlert';
 import Weather from './Components/Weather.js';
 import Movies from './Components/Movies.js';
+import Footer from './Components/Footer.js';
 
 
 class App extends React.Component {
@@ -45,7 +46,7 @@ class App extends React.Component {
 
   getMap = async () => {
     this.setState({
-      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=12`
+      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=12&size=1200x400`
     }, () => {
       this.getWeather();
       this.getMovies();
@@ -96,20 +97,19 @@ class App extends React.Component {
       <div className="App">
         <h1>city explorer</h1>
         <>
-          <SearchForm handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+          <SearchForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
         </>
         {this.state.errorMessage &&
           <InvalidSearchAlert />
         }
         {this.state.location.display_name &&
           <>
-            <div>
-              <Image
-                src={this.state.map}
-                alt="city map"
-              />
+            <div className='map-div'>
+              <Image className='map-image'
+            fluid src={this.state.map}
+            alt="city map" />
             </div>
-            <Accordion defaultActiveKey="0">
+            <Accordion className='accordion' defaultActiveKey="0">
               <Accordion.Item eventKey="0">
                 <Accordion.Header>city</Accordion.Header>
                 <Accordion.Body>
@@ -119,8 +119,8 @@ class App extends React.Component {
               <Accordion.Item eventKey="1">
                 <Accordion.Header>latitude and longitude</Accordion.Header>
                 <Accordion.Body>
-                  <h2>{this.state.location.lat}</h2>
-                  <h2>{this.state.location.lon}</h2>
+                  <h2>latitude: {this.state.location.lat}</h2>
+                  <h2>longitude: {this.state.location.lon}</h2>
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="2">
@@ -136,10 +136,10 @@ class App extends React.Component {
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
-
+            <Footer />
           </>
         }
-
+        
       </div >
 
     );

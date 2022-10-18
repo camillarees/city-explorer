@@ -1,3 +1,10 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500');
 
 .App {
@@ -58,12 +65,16 @@ input {
 
 }
 
-Image {
-  width: 200px !important;
-  height: 150px !important;
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  margin: 0;
+.map-div {
+  margin-top: 3rem;
+  padding-bottom: 3rem;
+  max-width: 100%;
+  max-height: 20%;
+}
+
+
+.footer-text {
+  margin-top: 3rem;
+  padding-bottom: 3rem;
 }
 
