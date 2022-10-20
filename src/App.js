@@ -10,7 +10,6 @@ import Weather from './Components/Weather.js';
 import Movies from './Components/Movies.js';
 import Footer from './Components/Footer.js';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);

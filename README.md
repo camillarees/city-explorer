@@ -8,7 +8,6 @@
 ### Deployment and Documentation
 
 - [Deployed page on Netlify](https://301n28-city-explorer.netlify.app/)
-- [Whiteboard](https://www.figma.com/file/5JiHEvvKfL51Qo9UDmR6fV/City-Explorer-Whiteboard) 
 - [Trello](https://trello.com/b/UrVXG4Dw/city-explorer)
 
 ## Overview
@@ -51,6 +50,8 @@ Search for cities to learn all about them. See a map of the city, its coordinate
     - JavaScript
     - Express
 
+![Whiteboard](./public/images/wireframe.png)
+
 APIs
 - LocationIQ API
 - Weather API
@@ -58,7 +59,7 @@ APIs
 - TMDB API
 
 ## Change Log
-- 10-17-2022 - Application works with recent results, so that user can see information without the app doing unnecessary API calls
+- 10-19-2022 - Application works with recent results, so that user can see information without the app doing unnecessary API calls
 - 10-12-2022 - Application displays movie data of the city searched for
 - 10-10-2022 - Application displays the forecast of the city searched for
 - 10-5-2022 - Application displays an error message for city searches that do not exist in the API
@@ -66,6 +67,5 @@ APIs
 - 10-5-2022 - Application displays the name and coordinates of the city searched for
 
 ## Credit and Collaborations
-- [Manuch Sadri](https://github.com/mcsadri), Whiteboard Collaboration
-- [Hexx King](https://github.com/HexxKing), Debugging
+- [Hexx King](https://github.com/HexxKing), Debugging, Whiteboard
 - [Justin Hamerly](https://github.com/JustinHamerly), Mentoring on passing props
