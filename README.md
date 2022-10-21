@@ -19,17 +19,17 @@ Search for cities to learn all about them. See a map of the city, its coordinate
 
 ## Key Features
 
-![Map](./public/images/map-photo.png)
+![Map](./public/images/map-2.png)
 
 ### Map
 - User can view a map of the city searched, centered by city coordinates 
 
-![Weather](./public/images/forecast.png)
+![Weather](./public/images/weather-2.png)
 
 ### Weather
 - User can view the coordinates and 5 day forecast for city searched
 
-![Movies](./public/images/movies.png)
+![Movies](./public/images/movies-2.png)
 
 ### Movies
 - User can browse a visual list of movies associated with city searched, as well as the movie's overview, ratings, and release date
