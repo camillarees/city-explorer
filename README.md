@@ -5,11 +5,6 @@
 **Author**: Camilla Rees
 **Version**: 1.0.0
 
-### Deployment and Documentation
-
-- [Deployed page on Netlify](https://301n28-city-explorer.netlify.app/)
-- [Trello](https://trello.com/b/UrVXG4Dw/city-explorer)
-
 ## Overview
 Search for cities to learn all about them. See a map of the city, its coordinates, a current 5 day forecast, and even movies associated with the city! 
 
@@ -57,6 +52,11 @@ APIs
 - Weather API
 - Yelp Fusion API
 - TMDB API
+
+### Deployment and Documentation
+
+- [Deployed page on Netlify](https://301n28-city-explorer.netlify.app/)
+- [Trello](https://trello.com/b/UrVXG4Dw/city-explorer)
 
 ## Change Log
 - 10-19-2022 - Application works with recent results, so that user can see information without the app doing unnecessary API calls
