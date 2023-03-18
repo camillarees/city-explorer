@@ -8,11 +8,10 @@ class SearchForm extends React.Component {
             <>
                 <Form onSubmit={this.props.handleSubmit} >
                     <Form.Group>
-                        <Form.Label>search any city in the world</Form.Label>
                         <Form.Control
                             type="text"
                             onChange={this.props.handleChange}
-                            placeholder="start typing"
+                            placeholder="search any city in the world"
                         />
                     </Form.Group>
                 </Form >
