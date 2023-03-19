@@ -5,8 +5,8 @@ import SearchForm from './Components/SearchForm';
 import InvalidSearchAlert from './Components/InvalidSearchAlert';
 import CarouselCard from './Components/Carousel';
 import LatLon from './Components/LatLon';
-import Weather from './Components/Weather';
-import { AppShell, AspectRatio, Navbar, ScrollArea, Title, Space} from '@mantine/core';
+import Weather from './Components/Weather/Weather';
+import { AppShell, AspectRatio, Navbar, ScrollArea, Title, Text, Space } from '@mantine/core';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class App extends React.Component {
       errorMessage: false,
       weather: [],
       movie: [],
-      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=2&size=3000x600`
+      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=2&size=600x600`
     }
   };
 
@@ -37,7 +37,7 @@ class App extends React.Component {
         errorMessage: true,
         error: error.response.data.error,
         location: {},
-        map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=1&size=3000x600`,
+        map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=1&size=600x600`,
       })
     }
   }
@@ -45,7 +45,7 @@ class App extends React.Component {
 
   getMap = async () => {
     this.setState({
-      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=12&size=3000x600`
+      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=12&size=1100x900`
     }, () => {
       this.getWeather();
     });
@@ -78,22 +78,27 @@ class App extends React.Component {
   render() {
     return (
       <AppShell
-        navbar={<Navbar width={{ base: 300 }} height="100%" p="xs">
-          {<>
-            <Navbar.Section mt="xs">
+        padding={0}
+        navbar={<Navbar width={{ base: 350 }} height="100%">
+          {
+            <>
+            <Navbar.Section mt="md" p="md">
               <Title order={2}>city explorer</Title>
-            </Navbar.Section><Navbar.Section mt="xs">
+            </Navbar.Section>
+            <Navbar.Section mt="sm" p="md">
               <SearchForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
               {this.state.errorMessage &&
                 <InvalidSearchAlert alert={this.state.error} />}
             </Navbar.Section>
             <CarouselCard location={this.state.location} />
-            <Space />
-            <Navbar.Section grow component={ScrollArea} mx="-xs" px="xs">
+            <Navbar.Section grow component={ScrollArea} mt="lg" p="md">
               <Title order={2}>{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
-              <Space />
-              <LatLon lat={this.state.location.lat} lon={this.state.location.lon} />
-                <Space />
+              <Space/>
+              <LatLon lat={this.state.location.lat} lon={this.state.location.lon}/>
+              <Space/>
+              <Text size="xl" align="left" weight={700}>
+                    weather
+                </Text>
               <Weather weatherData={this.state.weather} />
 
             </Navbar.Section>
@@ -107,7 +112,7 @@ class App extends React.Component {
       >
         {this.state.location.display_name &&
 
-          <AspectRatio ratio={3 / 5}
+          <AspectRatio ratio={1 / 1}
             className='map-image'>
             <iframe
               src={this.state.map}

@@ -6,8 +6,7 @@ class LatLon extends React.Component {
     render() {
         return (
             <>
-                <Text>latitude: {this.props.lat}</Text>
-                <Text>longitude: {this.props.lon}</Text>
+                <Text size="xl">coordinates: {this.props.lat} & {this.props.lon}</Text>
 
             </>
         )
