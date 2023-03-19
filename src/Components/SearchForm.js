@@ -10,7 +10,7 @@ class SearchForm extends React.Component {
                 <form onSubmit={this.props.handleSubmit}>
                     <TextInput
                         onChange={this.props.handleChange}
-                        icon={<Search size="1.1rem" stroke={1.5} color={'gray'} />}
+                        icon={<Search size={48} stroke={1.5} color={'#19244d'} />}
                         radius="xl"
                         size="md"
                         rightSection={
@@ -19,8 +19,9 @@ class SearchForm extends React.Component {
                                 size={32}
                                 radius="xl"
                                 color={"blue"}
-                                variant="filled">
-                                <ArrowRight size="1.1rem" stroke={1.5} color={'white'} />
+                                variant="filled"
+                                >
+                                <ArrowRight size={48} stroke={1.5} color={'white'} />
 
                             </ActionIcon>
                         }
