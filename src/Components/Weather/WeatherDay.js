@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Grid, Card, Image, Group, Text} from '@mantine/core';
+import { SimpleGrid, Card, Image, Text } from '@mantine/core';
 import suncon from '../../icons/suncon.png';
 import partlycloudycon from '../../icons/partlycloudycon.png';
 import cloudcon from '../../icons/cloudycon.png'
@@ -31,28 +30,27 @@ class WeatherDay extends React.Component {
         };
         return (
             <>
-                <Grid gutter={1}>
-                    <Grid.Col>
-                        <Card>
-                            <Card.Section>
-                                <Image
-                                    src={weathericons[this.props.weather.description.toLowerCase()]}
-                                    height={100}
-                                    fit="contain"
-                                />
-                            </Card.Section>
-                            <Group position="apart" mt="md" mb="xs">
+                <SimpleGrid cols={3}>
+                    {this.props.weather.map((day) => (
+                            <Card p=".5rem">
+                                <Card.Section p="0">
+                                    <Image
+                                        src={weathericons[day.description.toLowerCase()]}
+                                        height={80}
+                                        fit="contain"
+                                    />
+                                </Card.Section>
 
-                                <Text align="left">
-                                    {this.props.weather.date.toLowerCase()}
+                                <Text fz="md" fw={500} align="center">
+                                    {day.date.slice(5)}
                                 </Text>
-                                <Text align="left">
-                                    {this.props.weather.description.toLowerCase()}
-                                </Text>
-                            </Group>
-                        </Card>
-                    </Grid.Col>
-                </Grid>
+                                {/* <Text fz="md" align="center">
+                                    {day.description.toLowerCase()}
+                                </Text> */}
+                            </Card>
+                    ))}
+
+                </SimpleGrid>
             </>
         )
     }

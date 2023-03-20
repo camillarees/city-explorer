@@ -3,13 +3,10 @@ import WeatherDay from './WeatherDay';
 
 class Weather extends React.Component {
     render() {
+        const weatherDataArray = Object.values(this.props.weatherData);
         return(
             <>
-            {this.props.weatherData && this.props.weatherData.map((day, idx) => (
-                    <WeatherDay
-                    key={idx}
-                    weather={day}/>
-            ))}
+                    <WeatherDay weather={weatherDataArray} />
                 </>
         )
     }
