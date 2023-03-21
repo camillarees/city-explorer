@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, ActionIcon } from '@mantine/core';
+import { TextInput, ActionIcon} from '@mantine/core';
 import { Search, ArrowRight } from 'tabler-icons-react';
 
 class SearchForm extends React.Component {
@@ -10,18 +10,18 @@ class SearchForm extends React.Component {
                 <form onSubmit={this.props.handleSubmit}>
                     <TextInput
                         onChange={this.props.handleChange}
-                        icon={<Search size={48} stroke={1.5} color={'#19244d'} />}
+                        icon={<Search /> }
                         radius="xl"
-                        size="md"
+                        size="lg"
                         rightSection={
                             <ActionIcon
                                 onClick={this.props.handleSubmit}
                                 size={32}
                                 radius="xl"
-                                color={"blue"}
+                                color="indigo.5"
                                 variant="filled"
                                 >
-                                <ArrowRight size={48} stroke={1.5} color={'white'} />
+                                <ArrowRight />
 
                             </ActionIcon>
                         }

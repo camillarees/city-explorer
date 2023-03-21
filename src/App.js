@@ -5,8 +5,8 @@ import SearchForm from './Components/SearchForm';
 import InvalidSearchAlert from './Components/InvalidSearchAlert';
 import CarouselCard from './Components/Carousel';
 import LatLon from './Components/LatLon';
-import Weather from './Components/Weather/Weather';
-import { AppShell, AspectRatio, Navbar, ScrollArea, Title, Text, Space } from '@mantine/core';
+import WeatherDay from './Components/Weather/Weather';
+import { AppShell, AspectRatio, Navbar, ScrollArea, Title, Text, Divider} from '@mantine/core';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class App extends React.Component {
       errorMessage: false,
       weather: [],
       movie: [],
-      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=2&size=600x600`
+      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=2&size=1100x900`
     }
   };
 
@@ -37,7 +37,7 @@ class App extends React.Component {
         errorMessage: true,
         error: error.response.data.error,
         location: {},
-        map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=1&size=600x600`,
+        map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=1&size=1100x900`,
       })
     }
   }
@@ -79,30 +79,33 @@ class App extends React.Component {
     return (
       <AppShell
         padding={0}
-        navbar={<Navbar width={{ base: 350 }} height="100%">
+        navbar={<Navbar width={{ base: "30%" }} height="100%">
           {
             <>
-            <Navbar.Section mt="md" p="md">
-              <Title order={2}>city explorer</Title>
-            </Navbar.Section>
-            <Navbar.Section mt="sm" p="md">
-              <SearchForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
-              {this.state.errorMessage &&
-                <InvalidSearchAlert alert={this.state.error} />}
-            </Navbar.Section>
-            <CarouselCard location={this.state.location} />
-            <Navbar.Section grow component={ScrollArea} mt="lg" p="md">
-              <Title order={2}>{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
-              <Space/>
-              <LatLon lat={this.state.location.lat} lon={this.state.location.lon}/>
-              <Space/>
-              <Text size="xl" align="left" weight={700}>
-                    weather
-                </Text>
-              <Weather weatherData={this.state.weather} />
+              <Navbar.Section mt="xs" p="md">
+                <Title
+                  variant="gradient"
+                  gradient={{ from: '#364FC7', to: '#BAC8FF', deg: 45 }}
+                  order={2} size="3rem"> city <Text span weight=".5rem" inherit>explorer</Text>
+                </Title>
+              </Navbar.Section>
+              <Navbar.Section p="md">
+                <SearchForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
+                {this.state.errorMessage &&
+                  <InvalidSearchAlert alert={this.state.error} />}
+              </Navbar.Section>
+              <CarouselCard location={this.state.location} />
+              <Navbar.Section grow component={ScrollArea} mt="sm" p="md">
+                <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
+                <LatLon lat={this.state.location.lat} lon={this.state.location.lon} />
+                <Divider mt="md" size="sm" />
+                <Title mt="md" mb="xs" order={2} align="left" weight="3rem">
+                  weather
+                </Title>
+                <WeatherDay weatherData={this.state.weather} />
 
-            </Navbar.Section>
-          </>
+              </Navbar.Section>
+            </>
           }
         </Navbar>
         }
