@@ -16,7 +16,7 @@ class App extends React.Component {
       location: {},
       errorMessage: false,
       weather: [],
-      movie: [],
+      images: [],
       map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=2&size=1100x900`
     }
   };
@@ -50,6 +50,11 @@ class App extends React.Component {
       this.getWeather();
     });
   };
+
+
+  getImages = async () => {
+
+  }
 
   getWeather = async () => {
     try {
@@ -94,7 +99,7 @@ class App extends React.Component {
                 {this.state.errorMessage &&
                   <InvalidSearchAlert alert={this.state.error} />}
               </Navbar.Section>
-              <CarouselCard location={this.state.location} />
+              <CarouselCard searchQuery={this.state.searchQuery} location={this.state.location} images={this.state.images} />
               <Navbar.Section grow component={ScrollArea} mt="sm" p="md">
                 <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
                 <LatLon lat={this.state.location.lat} lon={this.state.location.lon} />
