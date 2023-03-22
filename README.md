@@ -1,9 +1,9 @@
 # City Explorer
 
-![City Explorer Main Page](./public/images/city-explorer-main.png)
-
 **Author**: Camilla Rees
 **Version**: 1.0.0
+
+![Demo Image](./public/images/city-explorer-demo-image.png)
 
 ## Overview
 Search for cities to learn all about them. See a map of the city, its coordinates, a current 6 day forecast, and photos of the city! 
@@ -13,8 +13,6 @@ Search for cities to learn all about them. See a map of the city, its coordinate
  In order to achieve the output listed in the overview above, I built a form to collect city name searches from the user, used the data from the form to query my APIs for the latitude, longitude, map, live forecast and movies related to the city, and used the React Bootstrap Accordion, Image and Card components to display each of these. I also used an error handler to recognize API call errors and render a React Alert component with a respective error message.
 
 ## Key Features
-
-![Map](./public/images/map-2.png)
 
 ### Map
 - User can view a map of the city searched, centered by city coordinates 
