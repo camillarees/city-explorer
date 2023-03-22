@@ -6,7 +6,7 @@
 **Version**: 1.0.0
 
 ## Overview
-Search for cities to learn all about them. See a map of the city, its coordinates, a current 5 day forecast, and even movies associated with the city! 
+Search for cities to learn all about them. See a map of the city, its coordinates, a current 6 day forecast, and photos of the city! 
 
 ## How it Works
 
@@ -19,15 +19,11 @@ Search for cities to learn all about them. See a map of the city, its coordinate
 ### Map
 - User can view a map of the city searched, centered by city coordinates 
 
-![Weather](./public/images/weather-2.png)
-
 ### Weather
 - User can view the coordinates and 5 day forecast for city searched
 
-![Movies](./public/images/movies-2.png)
-
-### Movies
-- User can browse a visual list of movies associated with city searched, as well as the movie's overview, ratings, and release date
+### Photos
+- User can view photos of the city searched
 
 ### Server Memory
 - Application stores previous searches in server memory for future calls, rather than incurring the delay of repeating the request to third-party APIs
@@ -49,9 +45,8 @@ Search for cities to learn all about them. See a map of the city, its coordinate
 
 APIs
 - LocationIQ API
-- Weather API
-- Yelp Fusion API
-- TMDB API
+- Weatherbit API
+- Unsplash API
 
 ### Deployment and Documentation
 
