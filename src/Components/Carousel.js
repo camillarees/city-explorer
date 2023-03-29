@@ -40,7 +40,7 @@ import { Carousel } from '@mantine/carousel';
 
     const fetchImages = async (query) => {
       const response = await fetch(
-        `https://api.unsplash.com/search/photos?query=${query}&per_page=5`,
+        `https://api.unsplash.com/search/photos?query=${query}&orientation=landscape&page=1&per_page=5`,
         {
           headers: {
             Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_API_KEY}`,

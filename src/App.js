@@ -51,11 +51,6 @@ class App extends React.Component {
     });
   };
 
-
-  getImages = async () => {
-
-  }
-
   getWeather = async () => {
     try {
       const weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
@@ -76,11 +71,13 @@ class App extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.getLocation();
-    console.log(event)
   }
 
 
   render() {
+    const { location, weather } = this.state;
+    const showResults = location && weather;
+
     return (
       <AppShell
         padding={0}
@@ -100,6 +97,7 @@ class App extends React.Component {
                   <InvalidSearchAlert alert={this.state.error} />}
               </Navbar.Section>
               <CarouselCard searchQuery={this.state.searchQuery} location={this.state.location} images={this.state.images} />
+              {showResults &&
               <Navbar.Section grow component={ScrollArea} mt="sm" p="md">
                 <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
                 <LatLon lat={this.state.location.lat} lon={this.state.location.lon} />
@@ -108,8 +106,8 @@ class App extends React.Component {
                   weather
                 </Title>
                 <WeatherDay weatherData={this.state.weather} />
-
               </Navbar.Section>
+          }
             </>
           }
         </Navbar>
