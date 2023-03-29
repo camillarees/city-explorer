@@ -52,6 +52,8 @@ APIs
 - [Trello](https://trello.com/b/UrVXG4Dw/city-explorer)
 
 ## Change Log
+- 3-20-2023 - Application pulls related city photos from Unsplash API
+- 3-18-2023 - Application has an upgraded UI, with adjusted map aspect ratio, spacing, navigation bar, weather grid and icons, and carousel
 - 10-19-2022 - Application works with recent results, so that user can see information without the app doing unnecessary API calls
 - 10-12-2022 - Application displays movie data of the city searched for
 - 10-10-2022 - Application displays the forecast of the city searched for
