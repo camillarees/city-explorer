@@ -6,7 +6,8 @@ import InvalidSearchAlert from './Components/InvalidSearchAlert';
 import CarouselCard from './Components/Carousel';
 import LatLon from './Components/LatLon';
 import WeatherDay from './Components/Weather/Weather';
-import { AppShell, AspectRatio, Navbar, ScrollArea, Title, Text, Divider} from '@mantine/core';
+import { AppShell, AspectRatio, Navbar, ScrollArea, Title, Text } from '@mantine/core';
+import { motion } from 'framer-motion';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends React.Component {
     this.state = {
       searchQuery: "",
       location: {},
+      submitted: false,
       errorMessage: false,
       weather: [],
       images: [],
@@ -71,6 +73,7 @@ class App extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.getLocation();
+    this.setState({ submitted: true });
   }
 
 
@@ -98,16 +101,23 @@ class App extends React.Component {
               </Navbar.Section>
               <CarouselCard searchQuery={this.state.searchQuery} location={this.state.location} images={this.state.images} />
               {showResults &&
-              <Navbar.Section grow component={ScrollArea} mt="sm" p="md">
-                <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
-                <LatLon lat={this.state.location.lat} lon={this.state.location.lon} />
-                <Divider mt="md" size="sm" />
-                <Title mt="md" mb="xs" order={2} align="left" weight="3rem">
-                  weather
-                </Title>
-                <WeatherDay weatherData={this.state.weather} />
-              </Navbar.Section>
-          }
+                <Navbar.Section grow component={ScrollArea} mt="sm" p="md">
+                      <motion.div
+                    transition={{
+                      duration: .5,
+                      delay: 0.3,
+                      ease: [0.2, 0.2, 0.2, 0.2],
+                    }}
+                    initial={{ opacity: 0, y: 23 }}
+                    whileInView={{ opacity: 1, y: 5 }}
+                    viewport={{ once: true }}
+                  >   
+                    <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
+                    </motion.div>
+                    <LatLon lat={this.state.location.lat} lon={this.state.location.lon} submitted={this.state.submitted} />
+                    <WeatherDay weatherData={this.state.weather} submitted={this.state.submitted} />
+                </Navbar.Section>
+              }
             </>
           }
         </Navbar>
