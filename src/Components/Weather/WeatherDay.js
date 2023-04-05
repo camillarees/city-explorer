@@ -1,5 +1,5 @@
 import React from 'react';
-import { SimpleGrid, Card, Image, Text } from '@mantine/core';
+import { SimpleGrid, Card, Image, Text, Title } from '@mantine/core';
 import suncon from '../../icons/suncon.png';
 import partlycloudycon from '../../icons/partlycloudycon.png';
 import cloudcon from '../../icons/cloudycon.png'
@@ -7,8 +7,9 @@ import lightraincon from '../../icons/lightraincon.png';
 import lightningcon from '../../icons/lightningcon.png';
 import moderateraincon from '../../icons/moderateraincon.png';
 import heavyraincon from '../../icons/heavyraincon.png';
-import snowcon from '../../icons/snowcon.png'
-import smokecon from '../../icons/smokecon.png'
+import snowcon from '../../icons/snowcon.png';
+import smokecon from '../../icons/smokecon.png';
+import { motion } from 'framer-motion';
 
 class WeatherDay extends React.Component {
 
@@ -30,6 +31,19 @@ class WeatherDay extends React.Component {
         };
         return (
             <>
+                 <motion.div
+                    transition={{
+                      duration: .5,
+                      delay: 0.3,
+                      ease: [0.2, 0.2, 0.2, 0.2],
+                    }}
+                    initial={{ opacity: 0, y: 23 }}
+                    whileInView={{ opacity: 1, y: 5 }}
+                    viewport={{ once: true }}
+                  >    
+            <Title mt="md" mb="xs" order={2} align="left" weight="3rem">
+                  weather
+                </Title>
                 <SimpleGrid cols={3}>
                     {this.props.weather.map((day) => (
                             <Card p=".5rem">
@@ -40,17 +54,14 @@ class WeatherDay extends React.Component {
                                         fit="contain"
                                     />
                                 </Card.Section>
-
                                 <Text fz="md" fw={500} align="center">
                                     {day.date.slice(5)}
                                 </Text>
-                                {/* <Text fz="md" align="center">
-                                    {day.description.toLowerCase()}
-                                </Text> */}
-                            </Card>
+                            </Card>    
                     ))}
 
                 </SimpleGrid>
+                </motion.div>
             </>
         )
     }
