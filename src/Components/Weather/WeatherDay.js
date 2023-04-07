@@ -45,8 +45,8 @@ class WeatherDay extends React.Component {
                   weather
                 </Title>
                 <SimpleGrid cols={3}>
-                    {this.props.weather.map((day) => (
-                            <Card p=".5rem">
+                    {this.props.weather.map((day, index) => (
+                            <Card key={index} p=".5rem">
                                 <Card.Section p="0">
                                     <Image
                                         src={weathericons[day.description.toLowerCase()]}

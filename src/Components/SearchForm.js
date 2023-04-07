@@ -3,6 +3,7 @@ import { TextInput, ActionIcon} from '@mantine/core';
 import { Search, ArrowRight } from 'tabler-icons-react';
 
 class SearchForm extends React.Component {
+    
     render() {
 
         return (
