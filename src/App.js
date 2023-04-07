@@ -13,9 +13,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      submitted: false,
       searchQuery: "",
       location: {},
-      submitted: false,
       errorMessage: false,
       weather: [],
       images: [],
@@ -72,8 +72,12 @@ class App extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.getLocation();
-    this.setState({ submitted: true });
+    this.setState({
+      submitted: true,
+      errorMessage: false,
+    }, () => {
+      this.getLocation();
+    });
   }
 
 
@@ -99,10 +103,10 @@ class App extends React.Component {
                 {this.state.errorMessage &&
                   <InvalidSearchAlert alert={this.state.error} />}
               </Navbar.Section>
-              <CarouselCard searchQuery={this.state.searchQuery} location={this.state.location} images={this.state.images} />
               {showResults &&
                 <Navbar.Section grow component={ScrollArea} mt="sm" p="md">
-                      <motion.div
+                  <CarouselCard submitted={this.state.submitted} searchQuery={this.state.searchQuery} location={this.state.location} images={this.state.images} />
+                  <motion.div
                     transition={{
                       duration: .5,
                       delay: 0.3,
@@ -111,11 +115,11 @@ class App extends React.Component {
                     initial={{ opacity: 0, y: 23 }}
                     whileInView={{ opacity: 1, y: 5 }}
                     viewport={{ once: true }}
-                  >   
+                  >
                     <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
-                    </motion.div>
-                    <LatLon lat={this.state.location.lat} lon={this.state.location.lon} submitted={this.state.submitted} />
-                    <WeatherDay weatherData={this.state.weather} submitted={this.state.submitted} />
+                  </motion.div>
+                  <LatLon lat={this.state.location.lat} lon={this.state.location.lon} submitted={this.state.submitted} />
+                  <WeatherDay weatherData={this.state.weather} submitted={this.state.submitted} />
                 </Navbar.Section>
               }
             </>
