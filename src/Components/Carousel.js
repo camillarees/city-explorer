@@ -1,81 +1,86 @@
-import React, { useState, useEffect } from 'react';
-import { createStyles, Image, getStylesRef, rem } from '@mantine/core';
+import React from 'react';
+import { Image, rem, getStylesRef } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 
-    const useStyles = createStyles((theme) => ({
-        price: {
-          color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-        },
-    
-        carousel: {
-          '&:hover': {
-            [`& .${getStylesRef('carouselControls')}`]: {
-              opacity: 1,
-            },
-          },
-        },
-    
-        carouselControls: {
-          ref: getStylesRef('carouselControls'),
-          transition: 'opacity 150ms ease',
-          opacity: 0,
-        },
-    
-        carouselIndicator: {
-          width: rem(4),
-          height: rem(4),
-          transition: 'width 250ms ease',
-    
-          '&[data-active]': {
-            width: rem(16),
-          },
-        },
-      }));
 
-      
-    function CarouselCard({ searchQuery }) {
-    const { classes } = useStyles();
-    const [images, setImages] = useState([]);
-
-
-    const fetchImages = async (query) => {
-      const response = await fetch(
-        `https://api.unsplash.com/search/photos?query=${query}&orientation=landscape&page=1&per_page=5`,
-        {
-          headers: {
-            Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_API_KEY}`,
-          },
-        }
-      );
-      const data = await response.json();
-      setImages(data.results.map((result) => result.urls.regular));
+class CarouselCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: [],
     };
-  
-  useEffect(() => {
-      fetchImages(searchQuery);
-    }, [searchQuery]);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.display_name !== this.props.location.display_name) {
+      this.fetchImages(this.props.location.display_name);
+    }
+  }
+
+  fetchImages = async (locationName) => {
+    const response = await fetch(
+      `https://api.unsplash.com/search/photos?query=${locationName}&orientation=landscape&page=1&per_page=5`,
+      {
+        headers: {
+          Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_API_KEY}`,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    this.setState({ images: data.results.map((result) => result.urls.regular) });
+  };
+
+
+  render() {
+    const { images } = this.state;
 
     const slides = images.map((image) => (
       <Carousel.Slide key={image}>
         <Image src={image} height={220} />
       </Carousel.Slide>
+
     ));
-  
+
     return (
-          <Carousel
-            withIndicators
-            loop
-            classNames={{
-              root: classes.carousel,
-              controls: classes.carouselControls,
-              indicator: classes.carouselIndicator,
-            }}
-          >
-            {slides}
-          </Carousel>
+      <>
+        <Carousel
+          withIndicators
+          loop
+          style={{
+            root: {
+              '&:hover': {
+                [`& .${getStylesRef('carouselControls')}`]: {
+                  opacity: 1,
+                },
+              },
+              controls: {
+                ref: getStylesRef('carouselControls'),
+                transition: 'opacity 150ms ease',
+                opacity: 0,
+              },
+
+              indicator: {
+                width: rem(4),
+                height: rem(4),
+                transition: 'width 250ms ease',
+
+                '&[data-active]': {
+                  width: rem(16),
+                },
+              },
+
+            }
+          }
+          }
+        >
+          {slides}
+        </Carousel>
+      </>
     );
   }
 
+}
 
 export default CarouselCard;
-  
+
