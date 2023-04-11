@@ -13,8 +13,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      submitted: false,
       searchQuery: "",
+      submitted: false,
       location: {},
       errorMessage: false,
       weather: [],
@@ -32,7 +32,7 @@ class App extends React.Component {
       const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.searchQuery}&format=json`;
       console.log('URL: ', url);
       const response = await axios.get(url)
-      this.setState({ location: response.data[0], errorMessage: false }, () => this.getMap());
+      this.setState({ location: response.data[0], submitted: true, errorMessage: false }, () => this.getMap());
     } catch (error) {
       console.log(error.response.data);
       this.setState({
@@ -70,13 +70,14 @@ class App extends React.Component {
     }
   }
 
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
-      submitted: true,
       errorMessage: false,
-    }, () => {
-      this.getLocation();
+    }, 
+    async () => {
+      await this.getLocation();
     });
   }
 
@@ -104,23 +105,26 @@ class App extends React.Component {
                   <InvalidSearchAlert alert={this.state.error} />}
               </Navbar.Section>
               {showResults &&
-                <Navbar.Section grow component={ScrollArea} mt="sm" p="md">
-                  <CarouselCard submitted={this.state.submitted} searchQuery={this.state.searchQuery} location={this.state.location} images={this.state.images} />
-                  <motion.div
-                    transition={{
-                      duration: .5,
-                      delay: 0.3,
-                      ease: [0.2, 0.2, 0.2, 0.2],
-                    }}
-                    initial={{ opacity: 0, y: 23 }}
-                    whileInView={{ opacity: 1, y: 5 }}
-                    viewport={{ once: true }}
-                  >
-                    <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
-                  </motion.div>
-                  <LatLon lat={this.state.location.lat} lon={this.state.location.lon} submitted={this.state.submitted} />
-                  <WeatherDay weatherData={this.state.weather} submitted={this.state.submitted} />
-                </Navbar.Section>
+                <>
+                  <Navbar.Section>
+                    <CarouselCard location={this.state.location} images={this.state.images} submitted={this.state.submitted}/>
+                  </Navbar.Section>
+                  <Navbar.Section grow component={ScrollArea} mt="sm" p="md">
+                    <motion.div
+                      transition={{
+                        duration: .5,
+                        delay: 0.3,
+                        ease: [0.2, 0.2, 0.2, 0.2],
+                      }}
+                      initial={{ opacity: 0, y: 23 }}
+                      whileInView={{ opacity: 1, y: 5 }}
+                      viewport={{ once: true }}
+                    >
+                      <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
+                    </motion.div>
+                    <LatLon lat={this.state.location.lat} lon={this.state.location.lon} submitted={this.state.submitted} />
+                    <WeatherDay weatherData={this.state.weather} />
+                  </Navbar.Section></>
               }
             </>
           }
