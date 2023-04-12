@@ -5,7 +5,7 @@ import SearchForm from './Components/SearchForm';
 import InvalidSearchAlert from './Components/InvalidSearchAlert';
 import CarouselCard from './Components/Carousel';
 import LatLon from './Components/LatLon';
-import WeatherDay from './Components/Weather/Weather';
+import Weather from './Components/Weather/Weather';
 import { AppShell, AspectRatio, Navbar, ScrollArea, Title, Text } from '@mantine/core';
 import { motion } from 'framer-motion';
 
@@ -75,10 +75,10 @@ class App extends React.Component {
     event.preventDefault();
     this.setState({
       errorMessage: false,
-    }, 
-    async () => {
-      await this.getLocation();
-    });
+    },
+      async () => {
+        await this.getLocation();
+      });
   }
 
 
@@ -107,7 +107,7 @@ class App extends React.Component {
               {showResults &&
                 <>
                   <Navbar.Section>
-                    <CarouselCard location={this.state.location} images={this.state.images} submitted={this.state.submitted}/>
+                    <CarouselCard location={this.state.location} images={this.state.images} submitted={this.state.submitted} />
                   </Navbar.Section>
                   <Navbar.Section grow component={ScrollArea} mt="sm" p="md">
                     <motion.div
@@ -122,9 +122,14 @@ class App extends React.Component {
                     >
                       <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
                     </motion.div>
-                    <LatLon lat={this.state.location.lat} lon={this.state.location.lon} submitted={this.state.submitted} />
-                    <WeatherDay weatherData={this.state.weather} />
-                  </Navbar.Section></>
+                    {showResults &&
+                      <>
+                        <LatLon lat={this.state.location.lat} lon={this.state.location.lon} submitted={this.state.submitted} />
+                        <Weather weatherData={this.state.weather} submitted={this.state.submitted} />
+                      </>
+                    }
+                  </Navbar.Section>
+                </>
               }
             </>
           }
