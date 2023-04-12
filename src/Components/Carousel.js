@@ -34,6 +34,7 @@ class CarouselCard extends React.Component {
 
   render() {
     const { images } = this.state;
+    const { submitted } = this.props;
 
     const slides = images.map((image) => (
       <Carousel.Slide key={image}>
@@ -44,6 +45,7 @@ class CarouselCard extends React.Component {
 
     return (
       <>
+          {submitted && (
         <Carousel
           withIndicators
           loop
@@ -76,6 +78,7 @@ class CarouselCard extends React.Component {
         >
           {slides}
         </Carousel>
+          )}
       </>
     );
   }

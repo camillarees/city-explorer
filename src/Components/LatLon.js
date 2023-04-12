@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 class LatLon extends React.Component {
     render() {
         const { lat, lon, submitted } = this.props;
+
         return (
             <>
                 {submitted && (
