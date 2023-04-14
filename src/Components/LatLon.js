@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, Divider } from '@mantine/core';
 import { motion } from 'framer-motion';
+import { TrendingUp3 } from 'tabler-icons-react';
 
 class LatLon extends React.Component {
     render() {
@@ -18,7 +19,7 @@ class LatLon extends React.Component {
                     }}
                     initial={{ opacity: 0, y: 23 }}
                     whileInView={{ opacity: 1, y: 5 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: TrendingUp3 }}
                   >
                 <Text size="lg">{lat} °N {lon} °W</Text>
                 <Divider mt="md" size="sm" />

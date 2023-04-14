@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import maplibregl from 'maplibre-gl';
+
 import SearchForm from './Components/SearchForm';
 import InvalidSearchAlert from './Components/InvalidSearchAlert';
 import CarouselCard from './Components/Carousel';
+import Map from './Components/Map/Map';
 import LatLon from './Components/LatLon';
 import Weather from './Components/Weather/Weather';
-import { AppShell, AspectRatio, Navbar, ScrollArea, Title, Text } from '@mantine/core';
+import { AppShell, Navbar, ScrollArea, Title, Text } from '@mantine/core';
 import { motion } from 'framer-motion';
 
 class App extends React.Component {
@@ -19,7 +22,7 @@ class App extends React.Component {
       errorMessage: false,
       weather: [],
       images: [],
-      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=2&size=1100x900`
+      map: ''
     }
   };
 
@@ -30,28 +33,18 @@ class App extends React.Component {
   getLocation = async () => {
     try {
       const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.searchQuery}&format=json`;
-      console.log('URL: ', url);
       const response = await axios.get(url)
-      this.setState({ location: response.data[0], submitted: true, errorMessage: false }, () => this.getMap());
+      this.setState({ location: response.data[0], submitted: true, errorMessage: false, map: `https://tiles.locationiq.com/v3/streets/vector.json?key=${process.env.REACT_APP_LOCATION_IQ_KEY}`});
     } catch (error) {
       console.log(error.response.data);
       this.setState({
         errorMessage: true,
         error: error.response.data.error,
         location: {},
-        map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=0,0&zoom=1&size=1100x900`,
       })
     }
   }
 
-
-  getMap = async () => {
-    this.setState({
-      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=12&size=1100x900`
-    }, () => {
-      this.getWeather();
-    });
-  };
 
   getWeather = async () => {
     try {
@@ -140,16 +133,10 @@ class App extends React.Component {
         })}
       >
         {this.state.location.display_name &&
-
-          <AspectRatio ratio={1 / 1}
-            className='map-image'>
-            <iframe
-              src={this.state.map}
-              title="city map"
-            />
-          </AspectRatio>
+          <>
+            <Map renderMap={this.state.map} lat={this.state.location.lat} lon={this.state.location.lon} />
+          </>
         }
-
 
       </AppShell>
     );
