@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
-import maplibregl from 'maplibre-gl';
 
 import SearchForm from './Components/SearchForm';
 import InvalidSearchAlert from './Components/InvalidSearchAlert';
@@ -34,7 +33,9 @@ class App extends React.Component {
     try {
       const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.searchQuery}&format=json`;
       const response = await axios.get(url)
-      this.setState({ location: response.data[0], submitted: true, errorMessage: false, map: `https://tiles.locationiq.com/v3/streets/vector.json?key=${process.env.REACT_APP_LOCATION_IQ_KEY}`});
+      this.setState({ location: response.data[0], submitted: true, errorMessage: false, map: `https://tiles.locationiq.com/v3/streets/vector.json?key=${process.env.REACT_APP_LOCATION_IQ_KEY}`}, async () => {
+        await this.getWeather();
+      });
     } catch (error) {
       console.log(error.response.data);
       this.setState({
@@ -50,7 +51,7 @@ class App extends React.Component {
     try {
       const weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}`;
       const response = await axios.get(weatherUrl);
-      console.log(response.data);
+      console.log("weather", response.data);
       this.setState({ weather: response.data });
     } catch (error) {
       console.log(error.response.data);
@@ -132,11 +133,9 @@ class App extends React.Component {
           main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
         })}
       >
-        {this.state.location.display_name &&
           <>
             <Map renderMap={this.state.map} lat={this.state.location.lat} lon={this.state.location.lon} />
           </>
-        }
 
       </AppShell>
     );

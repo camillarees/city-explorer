@@ -11,9 +11,8 @@ class Map extends React.Component {
         this.API_KEY = process.env.REACT_APP_MAP_KEY;
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const { renderMap, lat, lon } = this.props;
-
         this.map = new maplibregl.Map({
             container: this.mapContainer.current,
             style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${this.API_KEY}`,
@@ -21,46 +20,49 @@ class Map extends React.Component {
             zoom: renderMap !== '' ? 12 : 0
         });
         this.map.addControl(new maplibregl.NavigationControl(), 'top-right');
+        if (!isNaN(lat) && !isNaN(lon)) {
         new maplibregl.Marker({ color: "#FF0000" })
-          .setLngLat([lon, lat])
-          .addTo(this.map);
+            .setLngLat([lon, lat])
+            .addTo(this.map);
     }
+}
 
     componentDidUpdate(prevProps) {
         const { renderMap, lat, lon } = this.props;
         if (prevProps.renderMap !== renderMap || prevProps.lat !== lat || prevProps.lon !== lon) {
-          // Update the map style, center coordinates, and zoom level when props change
-          this.map.setStyle(renderMap);
-          this.map.setCenter([lon, lat]);
-          if (renderMap !== ''){
-            this.map.setZoom(12);
-          } else {
-            this.map.setZoom(0);
-          }
+            // Update the map style, center coordinates, and zoom level when props change
+            if (!isNaN(lat) && !isNaN(lon) && renderMap !== '') {
+                this.map.setStyle(renderMap);
+                this.map.setZoom(renderMap !== '' ? 12 : 0);
+                this.map.setCenter(renderMap !== '' ? [lon, lat] : [0, 0]);
+                new maplibregl.Marker({ color: "#FF0000" })
+                .setLngLat([lon, lat])
+                .addTo(this.map);
+            } else {
+                console.error('Invalid latitude or longitude values:', lat, lon);
+                // Set the map's view to a bounding box that encompasses the entire world
+                this.map.fitBounds([[-180, -90], [180, 90]]);
+            }
         }
-      }
+      
+    }
 
-    componentWillUnmount() {
-        // Clean up map instance when component is unmounted
-          this.map.remove();
-      }
-    
-      render(){
-    return (
-        <div className="map-wrap">
-            <div
-                className="map"
-                ratio={1 / 1}
-                ref={this.mapContainer}
-            >
-            <iframe
-                src={this.props.renderMap}
-                title="city map"
-            />
+    render() {
+        return (
+            <div className="map-wrap">
+                <div
+                    className="map"
+                    ratio={1 / 1}
+                    ref={this.mapContainer}
+                >
+                    <iframe
+                        src={this.props.renderMap}
+                        title="city map"
+                    />
+                </div>
             </div>
-    </div>
-  );
-}
+        );
+    }
 }
 
 
