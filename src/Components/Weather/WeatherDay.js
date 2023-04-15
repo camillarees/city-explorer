@@ -33,10 +33,27 @@ class WeatherDay extends React.Component {
         return (
             // <>
             //     {submitted && (
-                    <>
+            <>
+                <motion.div
+                    transition={{
+                        duration: 1,
+                        delay: 0.3,
+                        ease: [0.2, 0.2, 0.2, 0.2],
+                    }}
+                    initial={{ opacity: 0, y: 23 }}
+                    whileInView={{ opacity: 1, y: 5 }}
+                    viewport={{ once: true }}
+                >
+                    <Title mt="md" mb="xs" order={2} align="left" weight="3rem">
+                        weather
+                    </Title>
+                </motion.div>
+                <SimpleGrid cols={3}>
+                    {this.props.weather.map((day, index) => (
                         <motion.div
+                            key={index}
                             transition={{
-                                duration: .5,
+                                duration: 1,
                                 delay: 0.3,
                                 ease: [0.2, 0.2, 0.2, 0.2],
                             }}
@@ -44,30 +61,26 @@ class WeatherDay extends React.Component {
                             whileInView={{ opacity: 1, y: 5 }}
                             viewport={{ once: true }}
                         >
-                            <Title mt="md" mb="xs" order={2} align="left" weight="3rem">
-                                weather
-                            </Title>
-                            <SimpleGrid cols={3}>
-                                {this.props.weather.map((day, index) => (
-                                    <Card key={index} p=".5rem">
-                                        <Card.Section p="0">
-                                            <Image
-                                                src={weathericons[day.description.toLowerCase()]}
-                                                height={80}
-                                                fit="contain"
-                                            />
-                                        </Card.Section>
-                                        <Text fz="md" fw={500} align="center">
-                                            {day.date.slice(5)}
-                                        </Text>
-                                    </Card>
-                                ))}
+                            <Card key={index} p=".5rem">
 
-                            </SimpleGrid>
+                                <Card.Section p="0">
+                                    <Image
+                                        src={weathericons[day.description.toLowerCase()]}
+                                        height={80}
+                                        fit="contain"
+                                    />
+                                </Card.Section>
+                                <Text fz="md" fw={500} align="center">
+                                    {day.date.slice(5)}
+                                </Text>
+                            </Card>
                         </motion.div>
-                    </>
-            //     )}
-            // </>
+                    ))}
+
+                </SimpleGrid>
+
+            </>
+
         )
     }
 
