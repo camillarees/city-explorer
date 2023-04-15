@@ -8,14 +8,13 @@ class Map extends React.Component {
         super(props);
         this.mapContainer = React.createRef();
         this.zoom = 0;
-        this.API_KEY = process.env.REACT_APP_MAP_KEY;
     }
 
     componentDidMount() {
         const { renderMap, lat, lon } = this.props;
         this.map = new maplibregl.Map({
             container: this.mapContainer.current,
-            style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${this.API_KEY}`,
+            style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${process.env.REACT_APP_MAP_KEY}`,
             center: renderMap !== '' ? [lon, lat] : [0, 0],
             zoom: renderMap !== '' ? 12 : 0
         });
