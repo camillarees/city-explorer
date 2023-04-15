@@ -33,7 +33,7 @@ class App extends React.Component {
     try {
       const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.searchQuery}&format=json`;
       const response = await axios.get(url)
-      this.setState({ location: response.data[0], submitted: true, errorMessage: false, map: `https://tiles.locationiq.com/v3/streets/vector.json?key=${process.env.REACT_APP_LOCATION_IQ_KEY}`}, async () => {
+      this.setState({ location: response.data[0], submitted: true, errorMessage: false, map: `https://tiles.locationiq.com/v3/streets/vector.json?key=${process.env.REACT_APP_LOCATION_IQ_KEY}` }, async () => {
         await this.getWeather();
       });
     } catch (error) {
@@ -64,7 +64,6 @@ class App extends React.Component {
     }
   }
 
-
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
@@ -74,7 +73,6 @@ class App extends React.Component {
         await this.getLocation();
       });
   }
-
 
   render() {
     const { location, weather } = this.state;
@@ -104,24 +102,28 @@ class App extends React.Component {
                     <CarouselCard location={this.state.location} images={this.state.images} submitted={this.state.submitted} />
                   </Navbar.Section>
                   <Navbar.Section grow component={ScrollArea} mt="sm" p="md">
-                    <motion.div
-                      transition={{
-                        duration: .5,
-                        delay: 0.3,
-                        ease: [0.2, 0.2, 0.2, 0.2],
-                      }}
-                      initial={{ opacity: 0, y: 23 }}
-                      whileInView={{ opacity: 1, y: 5 }}
-                      viewport={{ once: true }}
-                    >
-                      <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
-                    </motion.div>
-                    {showResults &&
-                      <>
-                        <LatLon lat={this.state.location.lat} lon={this.state.location.lon} submitted={this.state.submitted} />
-                        <Weather weatherData={this.state.weather} submitted={this.state.submitted} />
-                      </>
-                    }
+                    <>
+                      {showResults &&
+                        <>
+                          <motion.div
+                            key={this.state.submitted} // Add a key prop here
+                            transition={{
+                              duration: 1,
+                              delay: 0.3,
+                              ease: [0.2, 0.2, 0.2, 0.2],
+                            }}
+                            initial={{ opacity: 0, y: 23 }}
+                            whileInView={{ opacity: 1, y: 5 }}
+                            viewport={{ once: true }}
+                          >
+                            <Title order={2} weight="3rem">{this.state.location.display_name ? this.state.location.display_name.toLowerCase() : ''}</Title>
+
+                            <LatLon lat={this.state.location.lat} lon={this.state.location.lon} submitted={this.state.submitted} />
+                            <Weather weatherData={this.state.weather} submitted={this.state.submitted} />
+                          </motion.div>
+                        </>
+                      }
+                    </>
                   </Navbar.Section>
                 </>
               }
@@ -133,9 +135,9 @@ class App extends React.Component {
           main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
         })}
       >
-          <>
-            <Map renderMap={this.state.map} lat={this.state.location.lat} lon={this.state.location.lon} />
-          </>
+        <>
+          <Map renderMap={this.state.map} lat={this.state.location.lat} lon={this.state.location.lon} />
+        </>
 
       </AppShell>
     );
