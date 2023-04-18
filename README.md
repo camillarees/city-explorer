@@ -3,7 +3,7 @@
 **Author**: Camilla Rees
 **Version**: 1.0.0
 
-[WATCH DEMO](https://www.youtube.com/watch?v=KzTGJyqmIwU)
+[Click here to watch demo!](https://www.youtube.com/watch?v=KzTGJyqmIwU)
 
 ![Demo Image](./public/images/city-explorer-demo-image.png)
 
