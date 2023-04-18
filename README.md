@@ -51,7 +51,6 @@ APIs
 
 ### Deployment and Documentation
 
-- [Deployed page on Netlify](https://301n28-city-explorer.netlify.app/)
 - [Trello](https://trello.com/b/UrVXG4Dw/city-explorer)
 
 ## Change Log
