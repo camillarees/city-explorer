@@ -12,6 +12,7 @@ class Map extends React.Component {
 
     componentDidMount() {
         const { renderMap, lat, lon } = this.props;
+        
         this.map = new maplibregl.Map({
             container: this.mapContainer.current,
             style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${process.env.REACT_APP_MAP_KEY}`,
@@ -24,6 +25,7 @@ class Map extends React.Component {
             .setLngLat([lon, lat])
             .addTo(this.map);
     }
+
 }
 
     componentDidUpdate(prevProps) {
