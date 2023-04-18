@@ -3,6 +3,8 @@
 **Author**: Camilla Rees
 **Version**: 1.0.0
 
+[WATCH DEMO](https://www.youtube.com/watch?v=Ja6cdZBoynE)
+
 ![Demo Image](./public/images/city-explorer-demo-image.png)
 
 ## Overview
@@ -10,21 +12,21 @@ Search for cities to learn all about them. See a map of the city, its coordinate
 
 ## How it Works
 
- In order to achieve the output listed in the overview above, I built a form to collect city name searches from the user, used the data from the form to query my APIs for the latitude, longitude, map, live forecast and movies related to the city, and used the React Bootstrap Accordion, Image and Card components to display each of these. I also used an error handler to recognize API call errors and render a React Alert component with a respective error message.
+ In order to achieve the output listed in the overview above, I built a form to collect city name searches from the user, used the data from the form to query my APIs for the latitude, longitude, map, live forecast, and used Mantine UI Components to display each of these. I also used an error handler to recognize API call errors and render a React Alert component with a respective error message.
 
 ## Key Features
 
 ### Map
-- User can view a map of the city searched, centered by city coordinates 
+- User can view a map of the city searched, explore any street from any angle, and navigate a map of the entire world in seconds. 
 
 ### Weather
-- User can view the coordinates and 5 day forecast for city searched
+- User can view the coordinates and 6 day forecast for city searched.
 
 ### Photos
-- User can view photos of the city searched
+- User can view photos of the city searched.
 
 ### Server Memory
-- Application stores previous searches in server memory for future calls, rather than incurring the delay of repeating the request to third-party APIs
+- Application stores previous searches in server memory for future calls, rather than incurring the delay of repeating the request to third-party APIs.
 
 ## Architecture
 
@@ -42,9 +44,10 @@ Search for cities to learn all about them. See a map of the city, its coordinate
 ![Whiteboard](./public/images/wireframe.png)
 
 APIs
-- LocationIQ API
-- Weatherbit API
-- Unsplash API
+- LocationIQ
+- Weatherbit
+- Unsplash
+- Maplibre 
 
 ### Deployment and Documentation
 
@@ -52,6 +55,7 @@ APIs
 - [Trello](https://trello.com/b/UrVXG4Dw/city-explorer)
 
 ## Change Log
+- 4-15-2023 - Application uses interactive map tile, so that user can explore any street from any angle and navigate a map of the entire world in seconds.
 - 3-20-2023 - Application pulls related city photos from Unsplash API
 - 3-18-2023 - Application has an upgraded UI, with adjusted map aspect ratio, spacing, navigation bar, weather grid and icons, and carousel
 - 10-19-2022 - Application works with recent results, so that user can see information without the app doing unnecessary API calls
