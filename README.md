@@ -8,11 +8,11 @@
 ![Demo Image](./public/images/city-explorer-demo-image.png)
 
 ## Overview
-Search for cities to learn all about them. See a map of the city, its coordinates, a current 6 day forecast, and photos of the city! 
+Search any city in the world. Navigate a map of the city, its coordinates, a current 6 day forecast, and photos of the city! 
 
 ## How it Works
 
- In order to achieve the output listed in the overview above, I built a form to collect city name searches from the user, used the data from the form to query my APIs for the latitude, longitude, map, live forecast, and used Mantine UI Components to display each of these. I also used an error handler to recognize API call errors and render a React Alert component with a respective error message.
+ In order to achieve the output listed in the overview above, this application utilizes a form to collect city name searches from the user, queries 4 APIs using form search input to pull location, weather, photo and map data. Mantine UI Components, including AppShell and NavBar were integrated to display key features. Error handlers are also built in to recognize API call errors and render a React Alert component with a respective error message.
 
 ## Key Features
 
@@ -23,7 +23,7 @@ Search for cities to learn all about them. See a map of the city, its coordinate
 - User can view the coordinates and 6 day forecast for city searched.
 
 ### Photos
-- User can view photos of the city searched.
+- User can view relevant photos of the city searched.
 
 ### Server Memory
 - Application stores previous searches in server memory for future calls, rather than incurring the delay of repeating the request to third-party APIs.
@@ -31,6 +31,7 @@ Search for cities to learn all about them. See a map of the city, its coordinate
 ## Architecture
 
 - Frontend
+    - JavaScript
     - React.js
     - HTML5
     - CSS3
@@ -40,6 +41,7 @@ Search for cities to learn all about them. See a map of the city, its coordinate
 - Backend
     - JavaScript
     - Express
+    - Node
 
 ![Whiteboard](./public/images/wireframe.png)
 
